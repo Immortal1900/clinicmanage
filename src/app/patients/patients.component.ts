@@ -1,3 +1,4 @@
+import { patient } from './../shared/patient';
 
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,7 @@ export class PatientsComponent implements OnInit {
   startAt=new Subject();
   endAt=new Subject();
   addpatient:FormGroup;
+  patientdata:FormGroup;
   patient=[1,2,3,4,5,6];
   emailPattern="(^$|^.*@.*\..*$)";
   phnopattern="[0-9]{10}";
@@ -33,14 +35,17 @@ export class PatientsComponent implements OnInit {
       phno:['', [Validators.required, Validators.pattern(this.phnopattern)]],
       gen: ['', [Validators.required]],     
       age: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      
-     
+      address: ['', [Validators.required]]     
         })
+      
   }
 
 
   open(content) {
+    this.modalService.open(content);
+  }
+  open1(content,pid){
+    this.patientService.getpatients(pid);
     this.modalService.open(content);
   }
   movies;
