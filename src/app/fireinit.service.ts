@@ -10,8 +10,8 @@ export class FireinitService {
 
   constructor() { }
 
-   initfirebase(){
-  
+  initfirebase(){
+    firebase.initializeApp(environment.firebase)
     console.log("Firebase Connected");
   }
 }

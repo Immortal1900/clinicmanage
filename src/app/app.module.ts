@@ -8,20 +8,29 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {AngularFirestore,AngularFirestoreModule} from '@angular/fire/firestore';
-
+import { Routes, RouterModule } from "@angular/router";
 import { environment } from '../environments/environment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PatientsComponent } from './patients/patients.component';
+import { DoctorsComponent } from './doctors/doctors.component';
+import { DocprofileComponent } from './docprofile/docprofile.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentsComponent,
-    PatientsComponent
+    PatientsComponent,
+    DoctorsComponent,
+    DocprofileComponent,
+  
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+   
     AngularFireModule.initializeApp(environment.firebase),
+
     AngularFireDatabaseModule,
     NgbModule,
     FormsModule,
@@ -30,7 +39,7 @@ import { PatientsComponent } from './patients/patients.component';
     AngularFirestoreModule,
     
   ],
-  providers: [TitleCasePipe],
+  providers: [TitleCasePipe,NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

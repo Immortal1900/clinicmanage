@@ -1,0 +1,164 @@
+<!--Main Page Content-->
+<div style="display: flex;justify-content: space-between;">
+    <h1>Doctors</h1>
+    <button class="btn btn-outline-primary" (click)="openXl(content)">Add Doctors</button>
+</div>
+
+<div class="container-fluid" style="margin-top: 4%;">
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let doc of doctorService.docs">
+      <div class="card" style="height:400px">
+        <div class="d-flex justify-content-center">
+         <div class="circle1">
+           <img class="imagecontain" src="{{doc.profileurl}}" alt="">
+         </div>
+        </div>
+        <div class="card docdata cardpadding">
+          <h4>Dr.{{doc.name}}</h4>
+          <h5>{{doc.phno}}</h5> 
+          <h6>{{doc.email}}</h6>  
+          <h5>{{doc.lastupdated}}</h5>
+          <button class="btn btn-primary btn-sm" [routerLink]="'/docprofile'" (click)="doctorService.getdoctor(doc.did)">View Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--Modal Content-->
+    <ng-template #content let-c="close" let-d="dismiss">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add Doctor</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+   <div>
+ 
+
+
+  <h3>Profile</h3>
+  <span style="color:red;" *ngIf="message">{{message}}</span>
+  <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+
+ 
+    <div class="circle cardpadding">
+      <img class="imagecontain" [src]="imageselected===true?imgURL:avatar"   alt="">
+    </div>
+  
+
+   </div>
+        
+    <form [formGroup]="adddoctor">
+    
+        <div class="row">
+           <div class="col-lg-7">
+            <div class="breadcrumb">    
+                <input
+                  class="form-control"
+                  placeholder="Name*"
+                  id="ex1"
+                  [formControl]="adddoctor.controls['name']"
+                  required
+                />
+              </div>
+           </div>
+           <div class="col-lg-4">
+            <div class="breadcrumb">    
+                <input
+                type="number"
+                  class="form-control "
+                  placeholder="Age*"
+                  id="ex3"
+                  [formControl]="adddoctor.controls['age']"
+                  required
+                />
+              </div>
+           </div>
+           <div class="col-lg-7">
+            <div class="breadcrumb">    
+                <input
+                  class="form-control"
+                  placeholder="Phno*"
+                  id="ex4"
+                  [formControl]="adddoctor.controls['phno']"
+                  required
+                />
+              </div>
+         </div>
+      <div class="col-lg-4">
+     
+        <div class="breadcrumb">
+    
+          <div class="custom-control custom-radio">
+            <input type="radio" id="m"  value="M" formControlName="gen"  name="gen" class="custom-control-input">
+            <label class="custom-control-label" for="m">M</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="f" value="F" formControlName="gen" name="gen" class="custom-control-input">
+            <label class="custom-control-label" for="f">F</label>
+          </div>
+        </div>
+       </div>
+    
+        <div class="col-lg-7">
+            <div class="breadcrumb">    
+                <input
+                  class="form-control"
+                  placeholder="Confirm Phno*"
+                  id="ex5"
+                  [formControl]="adddoctor.controls['phno']"
+                  required
+                />
+              </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="breadcrumb">    
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  id="ex6"
+                  [formControl]="adddoctor.controls['email']"
+                  required
+                />
+              </div>
+        </div>
+              
+        <div class="col-lg-7">
+            <div class="breadcrumb">    
+                <textarea
+                  class="form-control "
+                  placeholder="Address"
+                  id="ex7"
+                  [formControl]="adddoctor.controls['address']"
+                  required
+                ></textarea>
+              </div>
+           </div>
+
+
+        </div>
+    
+    
+    
+        </form>
+        </div>
+    
+    
+    
+    
+        <div class="modal-footer">
+          <button type="submit" (click)="submit(adddoctor)" class="btn btn-outline-dark" >Save</button>
+        </div>
+      </ng-template>
